@@ -1,36 +1,29 @@
 import java.awt.*;
 
 public class Entity {
-    private int xCoordinate;
-    private int yCoordinate;
+    private String name;
     private int speed;
+    private int strength;
+    private int health;
+    private int magicPower;
     private Image image;
     private JRPG game;
 
-    public Entity(int xCoordinate, int yCoordinate, int speed, String imageURL, JRPG game) {
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+    public Entity(String name, int health, int speed, int strength, int magicPower, JRPG game) { // maybe remove the parameters for the different attributes since they're set to default values
+        this.name = name;
+        this.health = health;
         this.speed = speed;
+        this.strength = strength;
+        this.magicPower = magicPower;
         this.game = game;
-        // game.GUI.getMainPanel().add(new CustomPaintComponent());
-        image = Toolkit.getDefaultToolkit().getImage(imageURL);
+        // image = Toolkit.getDefaultToolkit().getImage(imageURL);
     }
 
-    public int getxCoordinate() {
-        return xCoordinate;
+    public Entity(String species, JRPG game) {
+        name = species;
+
     }
 
-    public int getyCoordinate() {
-        return yCoordinate;
-    }
-
-    public void setxCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
-    }
-
-    public void setyCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
-    }
 
     public void setSpeed(int speed) {
         this.speed = speed;
@@ -50,6 +43,38 @@ public class Entity {
 
     public JRPG getGame() {
         return game;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getMagicPower() {
+        return magicPower;
+    }
+
+    public void setMagicPower(int magicPower) {
+        this.magicPower = magicPower;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public void update() {

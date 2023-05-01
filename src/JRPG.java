@@ -1,8 +1,13 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class JRPG {
     public GamePanel gamePanel;
     private Player player;
+    private ArrayList<Monster> onFieldMonsters;
+    private final ArrayList<String> monsters = new ArrayList<String>(Arrays.asList("Slime", "Wolf", "Skeleton"));
+    private final ArrayList<String> biomes = new ArrayList<String>(Arrays.asList("Forest", "Desert", "Ocean" ));
 
     public JRPG(){
         JFrame window = new JFrame();
@@ -18,8 +23,32 @@ public class JRPG {
         window.setVisible(true);
 
 
-        player = new Player(this);
+        player = new Player(this, gamePanel, gamePanel.getKeyHandler(), "Test", "Mage");
+        gamePanel.setPlayer(player);
+        onFieldMonsters = new ArrayList<Monster>();
+
         gamePanel.startGameThread();
+    }
+
+    public void mainMenu() {
+
+    }
+
+    public void inGameMenu() {
+
+    }
+
+    public void battle() {
+        gamePanel.displayBattle();
+        for (int i = 0; i < (int) (Math.random() * 4); i++) {
+            onFieldMonsters.add(new Monster(monsters.get((int) (Math.random() * monsters.size())), this));
+        }
+
+
+    }
+
+    public void deathScreen() {
+
     }
 
     public Player getPlayer() {

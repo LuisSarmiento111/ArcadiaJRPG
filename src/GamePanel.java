@@ -15,9 +15,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
 
-    private int x;
-    private int y;
-    private int speed;
     private Player player;
     final int FPS = 60;
 
@@ -30,9 +27,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
 
-        x = 100;
-        y = 100;
-        speed = 4;
     }
 
     public void startGameThread() {
@@ -47,6 +41,8 @@ public class GamePanel extends JPanel implements Runnable {
             update();
 
             repaint();
+
+            System.out.println("X-Coordiante: " + player.getxCoordinate() + " Y-Coordinate: " + player.getyCoordinate());
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
@@ -63,27 +59,31 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if(keyHandler.isUpPressed()) {
-            y -= speed;
-        }
-        if(keyHandler.isDownPressed()) {
-            y += speed;
-        }
-        if(keyHandler.isRightPressed()) {
-            x += speed;
-        }
-        if(keyHandler.isLeftPressed()) {
-            x -= speed;
-        }
+        player.update();
     }
 
     public void paintComponent (Graphics g) {
         super.paintComponents(g);
-        Graphics g2 = (Graphics2D) g;
-        g2.setColor(Color.black);
+        Graphics2D g2 = (Graphics2D) g;
         g2.clearRect(0,0,screenWidth, screenHeight);
-        g2.fillRect(x, y, tileSize, tileSize);
+        player.draw(g2);
         g2.dispose();
+    }
+
+    public void displayMainMenu() {
+
+    }
+
+    public void displayBattle() {
+
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
     }
 
 }
