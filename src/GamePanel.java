@@ -15,8 +15,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
 
-    private Player player;
+    public Player player;
     final int FPS = 60;
+
+    public boolean titleScreen;
+    public boolean menuScreen;
+    public boolean gameOver;
+    public boolean battleScreen;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));

@@ -7,7 +7,7 @@ public class JRPG {
     private Player player;
     private ArrayList<Monster> onFieldMonsters;
     private final ArrayList<String> monsters = new ArrayList<String>(Arrays.asList("Slime", "Wolf", "Skeleton"));
-    private final ArrayList<String> biomes = new ArrayList<String>(Arrays.asList("Forest", "Desert", "Ocean" ));
+    private final ArrayList<String> biomes = new ArrayList<String>(Arrays.asList("Forest", "Desert", "Ocean", "Plains", "Jungle", "Mushroom", "Ice"));
 
     public JRPG(){
         JFrame window = new JFrame();
@@ -41,10 +41,8 @@ public class JRPG {
     public void battle() {
         gamePanel.displayBattle();
         for (int i = 0; i < (int) (Math.random() * 4); i++) {
-            onFieldMonsters.add(new Monster(monsters.get((int) (Math.random() * monsters.size())), this));
+            onFieldMonsters.add(new Monster(monsters.get((int) (Math.random() * monsters.size())), this, gamePanel));
         }
-
-
     }
 
     public void deathScreen() {
