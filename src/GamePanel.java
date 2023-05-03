@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             repaint();
 
-            System.out.println("X-Coordiante: " + player.getxCoordinate() + " Y-Coordinate: " + player.getyCoordinate());
+            // System.out.println("X-Coordiante: " + player.getxCoordinate() + " Y-Coordinate: " + player.getyCoordinate());
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();

@@ -6,25 +6,18 @@ public class Entity {
     public int strength;
     public int health;
     public int magicPower;
+    public int xCoordinate;
+    public int yCoordinate;
+    public Rectangle hitBox;
     private Image image;
     public JRPG game;
     public GamePanel panel;
 
-    public Entity(String name, int health, int speed, int strength, int magicPower, JRPG game, GamePanel panel) { // maybe remove the parameters for the different attributes since they're set to default values
+    public Entity(String name, JRPG game, GamePanel panel) { // maybe remove the parameters for the different attributes since they're set to default values
         this.name = name;
-        this.health = health;
-        this.speed = speed;
-        this.strength = strength;
-        this.magicPower = magicPower;
         this.game = game;
         this.panel = panel;
         // image = Toolkit.getDefaultToolkit().getImage(imageURL);
-    }
-
-    public Entity(String name, JRPG JRPG, GamePanel panel) {
-        this.name = name;
-        this.game = JRPG;
-        this.panel = panel;
     }
 
     public String displayStats() {

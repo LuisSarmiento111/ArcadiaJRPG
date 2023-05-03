@@ -1,11 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Monster extends Entity{
-    private final String[][] monsters = {{"Slime", "3", "3", "3", "0"}};
+    private final String[][] monsters = getMonsterData("src/test.txt");
 
     public Monster(String species, JRPG JRPG, GamePanel panel) { // maybe coordinate parameters since monsters can't be on the same place when in battle
         super(species, JRPG, panel);
@@ -21,5 +24,27 @@ public class Monster extends Entity{
                 magicPower = Integer.parseInt(monsters[r][4]);
             }
         }
+    }
+
+    public static String[][] getMonsterData(String fileName) {
+        ArrayList<String[]> monsters = new ArrayList<String[]>();
+        try {
+            File movieData = new File(fileName);
+            Scanner reader = new Scanner(movieData);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] data = line.split(" ");
+                monsters.add(data);
+            }
+        }
+        catch (FileNotFoundException noFile) {
+            System.out.println("File not found!");
+            return null;
+        }
+        String[][] monsterData = new String[monsters.size()][monsters.get(0).length];
+        for (int i = 0; i < monsterData.length; i++) {
+            monsterData[i] = monsters.get(i);
+        }
+        return monsterData;
     }
 }
