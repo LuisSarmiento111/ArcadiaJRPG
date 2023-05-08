@@ -12,6 +12,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
     private KeyHandler keyHandler;
+    private Screens screens;
 
     Thread gameThread;
 
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
         keyHandler = new KeyHandler();
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        screens = new Screens(this);
 
     }
 
@@ -70,17 +72,12 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent (Graphics g) {
         super.paintComponents(g);
         Graphics2D g2 = (Graphics2D) g;
+        if (titleScreen) {
+            screens.drawTitleScreen(g2);
+        }
         g2.clearRect(0,0,screenWidth, screenHeight);
         player.draw(g2);
         g2.dispose();
-    }
-
-    public void displayMainMenu() {
-
-    }
-
-    public void displayBattle() {
-
     }
 
     public void setPlayer(Player player) {

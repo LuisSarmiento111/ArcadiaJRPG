@@ -23,7 +23,5 @@ public class Main {
             System.out.println("Writing file failed");
             System.out.println(ioe);
         }
-
-
     }
 }

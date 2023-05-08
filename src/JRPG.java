@@ -30,7 +30,7 @@ public class JRPG {
         gamePanel.startGameThread();
     }
 
-    public void mainMenu() {
+    public void titleScreen() {
 
     }
 
@@ -39,7 +39,7 @@ public class JRPG {
     }
 
     public void battle() {
-        gamePanel.displayBattle();
+        gamePanel.battleScreen = true;
         for (int i = 0; i < (int) (Math.random() * 4); i++) {
             onFieldMonsters.add(new Monster(monsters.get((int) (Math.random() * monsters.size())), this, gamePanel));
         }
