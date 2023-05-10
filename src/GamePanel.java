@@ -7,18 +7,17 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
     final int scale = 3;
     final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
-    private KeyHandler keyHandler;
-    private Screens screens;
+    final int screenWidth = 1920;
+    final int screenHeight = 1080;
+    public KeyHandler keyHandler;
+    public Screens screens;
 
     Thread gameThread;
 
     public Player player;
     final int FPS = 60;
 
+    public boolean inGame;
     public boolean titleScreen;
     public boolean menuScreen;
     public boolean gameOver;
@@ -26,14 +25,19 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(Color.blue);
         this.setDoubleBuffered(true);
 
-        keyHandler = new KeyHandler();
+        keyHandler = new KeyHandler(this);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         screens = new Screens(this);
 
+        inGame = false;
+        titleScreen = true;
+        menuScreen = false;
+        gameOver = false;
+        battleScreen = false;
     }
 
     public void startGameThread() {
@@ -72,12 +76,13 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent (Graphics g) {
         super.paintComponents(g);
         Graphics2D g2 = (Graphics2D) g;
-        if (titleScreen) {
-            screens.drawTitleScreen(g2);
-        }
         g2.clearRect(0,0,screenWidth, screenHeight);
-        player.draw(g2);
-        g2.dispose();
+        if (titleScreen) {
+            screens.drawTitleScreen(g2); // fix arrows not updating correctly
+        } else {
+            player.draw(g2);
+            g2.dispose();
+        }
     }
 
     public void setPlayer(Player player) {

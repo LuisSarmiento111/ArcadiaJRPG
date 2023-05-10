@@ -11,7 +11,7 @@ public class Player extends Entity {
     private KeyHandler keyHandler;
     private GamePanel gamePanel;
 
-    public Player(JRPG game, GamePanel gamePanel, KeyHandler keyHandler, String name, String playerClass) {
+    public Player(JRPG game, GamePanel gamePanel, String name, String playerClass) {
         super(name, game, gamePanel);
         xCoordinate = (gamePanel.screenWidth - gamePanel.tileSize)/ 2-  gamePanel.tileSize / 2;
         yCoordinate = (gamePanel.screenHeight - gamePanel.tileSize) / 2 - gamePanel.tileSize / 2;
@@ -27,7 +27,6 @@ public class Player extends Entity {
         experience = 0;
 
 
-        this.keyHandler = keyHandler;
         this.gamePanel = gamePanel;
     }
 
@@ -40,14 +39,24 @@ public class Player extends Entity {
     }
 
     public void update() {
-            if(keyHandler.isUpPressed()) {
-                yCoordinate -= 4;}
-            if(keyHandler.isDownPressed()) {
-                yCoordinate += 4;       }
-            if(keyHandler.isRightPressed()) {
-                xCoordinate += 4;      }
-            if(keyHandler.isLeftPressed()) {
-                xCoordinate -= 4;        }
+        if (gamePanel.inGame) {
+            if (gamePanel.keyHandler.isUpPressed()) {
+                yCoordinate -= 4;
+            }
+            if (gamePanel.keyHandler.isDownPressed()) {
+                yCoordinate += 4;
+            }
+            if (gamePanel.keyHandler.isRightPressed()) {
+                xCoordinate += 4;
+            }
+            if (gamePanel.keyHandler.isLeftPressed()) {
+                xCoordinate -= 4;
+            }
+            if(gamePanel.keyHandler.isMenuPressed()) {
+                gamePanel.titleScreen = true;
+                gamePanel.inGame = false;
+            }
+        }
     }
 
     public void draw(Graphics2D g2) {

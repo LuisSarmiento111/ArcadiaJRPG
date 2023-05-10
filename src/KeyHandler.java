@@ -7,8 +7,11 @@ public class KeyHandler implements KeyListener {
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
+    private boolean menuPressed;
+    private GamePanel gp;
 
-    public KeyHandler() {
+    public KeyHandler(GamePanel gamePanel) {
+        gp = gamePanel;
     }
 
     @Override
@@ -18,6 +21,10 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(gp.titleScreen)
+        {
+            onTitleScreen(e);
+        }
         if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
             upPressed = true;
         }
@@ -29,6 +36,33 @@ public class KeyHandler implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
             rightPressed = true;
+        }
+        if (e.getKeyChar() == 'p') {
+            menuPressed = true;
+        }
+    }
+
+    public void onTitleScreen(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_W)
+        {
+            gp.screens.optionNum--;
+            if(gp.screens.optionNum < 0)
+            {
+                gp.screens.optionNum = 1;
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_S)
+        {
+            gp.screens.optionNum++;
+            if(gp.screens.optionNum > 2)
+            {
+                gp.screens.optionNum = 0;
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            gp.titleScreen = false;
+            gp.inGame = true;
         }
     }
 
@@ -46,6 +80,9 @@ public class KeyHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
             rightPressed = false;
         }
+        if (e.getKeyChar() == 'p') {
+            menuPressed = false;
+        }
     }
 
     public boolean isUpPressed() {
@@ -62,5 +99,9 @@ public class KeyHandler implements KeyListener {
 
     public boolean isRightPressed() {
         return rightPressed;
+    }
+
+    public boolean isMenuPressed() {
+        return menuPressed;
     }
 }

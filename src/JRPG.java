@@ -23,7 +23,7 @@ public class JRPG {
         window.setVisible(true);
 
 
-        player = new Player(this, gamePanel, gamePanel.getKeyHandler(), "Test", "Mage");
+        player = new Player(this, gamePanel, "Test", "Mage");
         gamePanel.setPlayer(player);
         onFieldMonsters = new ArrayList<Monster>();
 
@@ -31,7 +31,7 @@ public class JRPG {
     }
 
     public void titleScreen() {
-
+       // gamePanel.titleScreen = true;
     }
 
     public void inGameMenu() {
