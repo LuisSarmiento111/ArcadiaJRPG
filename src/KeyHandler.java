@@ -48,7 +48,7 @@ public class KeyHandler implements KeyListener {
             gp.screens.optionNum--;
             if(gp.screens.optionNum < 0)
             {
-                gp.screens.optionNum = 1;
+                gp.screens.optionNum = 2;
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_S)

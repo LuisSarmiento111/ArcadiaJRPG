@@ -31,10 +31,10 @@ public class Screens {
         int x = gamePanel.screenWidth / 2 - 144;
         int y = gamePanel.tileSize * 3;
 
-        g.setColor(Color.gray);
+        g.setColor(Color.black);
         g.drawString(text, x + 2, y+5);
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.drawString(text, x, y);
 
 
