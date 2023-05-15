@@ -3,18 +3,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class JRPG {
-    public GamePanel gamePanel;
-    private Player player;
-    private ArrayList<Monster> onFieldMonsters;
     private final ArrayList<String> monsters = new ArrayList<String>(Arrays.asList("Slime", "Wolf", "Skeleton"));
     private final ArrayList<String> biomes = new ArrayList<String>(Arrays.asList("Forest", "Desert", "Ocean", "Plains", "Jungle", "Mushroom", "Ice"));
+    public GamePanel gamePanel;
+    public Player player;
+    private ArrayList<Monster> onFieldMonsters;
 
-    public JRPG(){
+    public JRPG() {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("2D Adventure");
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         window.add(gamePanel);
 
         window.pack();
@@ -22,16 +22,14 @@ public class JRPG {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-
-        player = new Player(this, gamePanel, "Test", "Mage");
-        gamePanel.setPlayer(player);
         onFieldMonsters = new ArrayList<Monster>();
 
         gamePanel.startGameThread();
+        titleScreen();
     }
 
     public void titleScreen() {
-       // gamePanel.titleScreen = true;
+        // gamePanel.titleScreen = true;
     }
 
     public void inGameMenu() {
@@ -47,9 +45,5 @@ public class JRPG {
 
     public void deathScreen() {
 
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 }

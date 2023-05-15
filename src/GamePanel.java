@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
@@ -9,25 +7,25 @@ public class GamePanel extends JPanel implements Runnable {
     final int tileSize = originalTileSize * scale;
     final int screenWidth = 1920;
     final int screenHeight = 1080;
-    public KeyHandler keyHandler;
-    public Screens screens;
-
-    Thread gameThread;
-
-    public Player player;
     final int FPS = 60;
-
+    public KeyHandler keyHandler;
+    public JRPG JRPG;
+    public Screens screens;
+    public Player player;
     public boolean inGame;
+    public boolean characterCreationScreen;
     public boolean titleScreen;
     public boolean menuScreen;
     public boolean gameOver;
     public boolean battleScreen;
+    Thread gameThread;
 
-    public GamePanel() {
+    public GamePanel(JRPG JRPG) {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.blue);
         this.setDoubleBuffered(true);
 
+        this.JRPG = JRPG;
         keyHandler = new KeyHandler(this);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
@@ -70,27 +68,28 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        if (inGame) {
+            JRPG.player.update();
+        }
     }
 
-    public void paintComponent (Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponents(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.clearRect(0,0,screenWidth, screenHeight);
+        g2.clearRect(0, 0, screenWidth, screenHeight);
         if (titleScreen) {
             screens.drawTitleScreen(g2); // fix arrows not updating correctly
+        } else if (characterCreationScreen) {
+            screens.drawCharacterCreation(g2);
         } else {
-            player.draw(g2);
+            JRPG.player.draw(g2);
             g2.dispose();
         }
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void endGame() {
+        gameThread = null;
     }
 
-    public KeyHandler getKeyHandler() {
-        return keyHandler;
-    }
 
 }
