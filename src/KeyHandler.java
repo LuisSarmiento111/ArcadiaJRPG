@@ -67,12 +67,10 @@ public class KeyHandler implements KeyListener {
                 gp.characterCreationScreen = true;
             } else if (gp.screens.optionNum == 1 && gp.JRPG.player != null) {
                 gp.inGame = true;
-                gp.titleScreen = false;
             } else {
                 gp.endGame();
             }
-
-
+            gp.titleScreen = false;
         }
     }
 

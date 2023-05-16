@@ -43,6 +43,10 @@ public class JRPG {
         }
     }
 
+    public Player[] loadPlayerData() {
+        return new Player[2]; // test
+    }
+
     public void deathScreen() {
 
     }

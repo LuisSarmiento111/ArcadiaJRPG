@@ -88,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void endGame() {
-        gameThread = null;
+        System.exit(0);
     }
 
 
