@@ -133,7 +133,7 @@ public class Player extends Entity {
                 image = sprites[spriteNum];
                 break;
         }
-        g2.drawString(name, xCoordinate + 25, yCoordinate - 50);
+        g2.drawString(name, xCoordinate, yCoordinate - 50);
         g2.drawImage(image, xCoordinate , yCoordinate, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
     }
 
