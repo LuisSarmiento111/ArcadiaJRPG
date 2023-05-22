@@ -51,6 +51,7 @@ public class Screens {
 
         text = "NEW GAME";
         y += gamePanel.tileSize * 6;
+        x -= 125;
         g.drawString(text, x, y);
         if (optionNum == 0) {
             g.drawString(">", x - gamePanel.tileSize, y - 8);
@@ -103,21 +104,18 @@ public class Screens {
             if (optionNum == 0) {
                 g.drawString(">", x - gamePanel.tileSize, y - 8);
             }
-
             text = "Mage";
             x += 430;
             g.drawString(text, x, y);
             if (optionNum == 1) {
                 g.drawString(">", x - gamePanel.tileSize, y - 8);
             }
-
             text = "Rouge";
             x += 430;
             g.drawString(text, x, y);
             if (optionNum == 2) {
                 g.drawString(">", x - gamePanel.tileSize, y - 8);
             }
-
             text = "Fighter";
             x += 430;
             g.drawString(text, x, y);

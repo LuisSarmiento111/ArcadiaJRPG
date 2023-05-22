@@ -102,13 +102,13 @@ public class KeyHandler implements KeyListener {
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (gp.screens.optionNum == 0) {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Paladin");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox.substring(1), "Paladin");
                 } else if (gp.screens.optionNum == 1) {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Mage");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox.substring(1), "Mage");
                 } else if (gp.screens.optionNum == 2) {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Rouge");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox.substring(1), "Rouge");
                 } else {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Fighter");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox.substring(1), "Fighter");
                 }
                 gp.characterCreationScreen = false;
                 gp.inGame = true;

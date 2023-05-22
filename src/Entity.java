@@ -12,6 +12,8 @@ public class Entity {
     private Image image;
     public JRPG game;
     public GamePanel panel;
+    public int spriteCounter = 0;
+    public int spriteNum = 0;
 
     public Entity(String name, JRPG game, GamePanel panel) { // maybe remove the parameters for the different attributes since they're set to default values
         this.name = name;
