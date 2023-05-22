@@ -1,11 +1,20 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Player extends Entity {
     private ArrayList<String> inventory;
     private String playerClass;
     private int playerLevel;
     private int experience;
+    private String UID;
+    private BufferedImage playerSprite;
+    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public String direction;
 
     private final String[][] classes = {{"Knight", "8"}, {"Mage", "5"}};
     private KeyHandler keyHandler;
@@ -22,12 +31,30 @@ public class Player extends Entity {
         hitBox.height = gamePanel.tileSize;
 
         this.playerClass = playerClass;
+        UID = "02612111220";
         setStats();
         playerLevel = 1;
         experience = 0;
+        direction = "down";
+        getPlayerImage();
 
 
         this.gamePanel = gamePanel;
+    }
+
+    public void getPlayerImage() {
+        try {
+            up1 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            up2 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            down1 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            down2 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            left1 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            left2 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            right1 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+            right2 = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(0, 0, 50, 50);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setStats() {
@@ -41,15 +68,19 @@ public class Player extends Entity {
     public void update() {
         if (gamePanel.inGame) {
             if (gamePanel.keyHandler.isUpPressed()) {
+                direction = "up";
                 yCoordinate -= 4;
             }
             if (gamePanel.keyHandler.isDownPressed()) {
+                direction = "down";
                 yCoordinate += 4;
             }
             if (gamePanel.keyHandler.isRightPressed()) {
+                direction = "right";
                 xCoordinate += 4;
             }
             if (gamePanel.keyHandler.isLeftPressed()) {
+                direction = "left";
                 xCoordinate -= 4;
             }
             if(gamePanel.keyHandler.isMenuPressed()) {
@@ -60,8 +91,25 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.black);
-        g2.fillRect(xCoordinate, yCoordinate, hitBox.width, hitBox.height);
+        //g2.setColor(Color.black);
+        // g2.fillRect(xCoordinate, yCoordinate, hitBox.width, hitBox.height);
+        BufferedImage image = null;
+
+        switch (direction) {
+            case "up":
+                image = up1;
+                break;
+            case "down":
+                image = down1;
+                break;
+            case "right":
+                image = right1;
+                break;
+            case "left":
+                image = left1;
+                break;
+        }
+        g2.drawImage(image, xCoordinate, yCoordinate, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
     public ArrayList<String> getInventory() {

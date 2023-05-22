@@ -30,7 +30,7 @@ public class Screens {
     }
 
     public void drawTitleScreen(Graphics2D g) {
-        gamePanel.setBackground(Color.blue);
+        gamePanel.setBackground(Color.BLACK);
         g.setFont(immortal.deriveFont(Font.BOLD, 77F));
         String text = "TEST";
         int x = gamePanel.screenWidth / 2 - 144;
@@ -72,7 +72,8 @@ public class Screens {
     }
 
     public void drawCharacterCreation(Graphics2D g) {
-        gamePanel.setBackground(Color.blue);
+        gamePanel.setOpaque(true);
+        gamePanel.setBackground(Color.BLACK);
         if (pgNum == 0) {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
             String text = "What is your name?";
