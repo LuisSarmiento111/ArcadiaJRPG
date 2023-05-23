@@ -30,7 +30,6 @@ public class Screens {
     }
 
     public void drawTitleScreen(Graphics2D g) {
-        gamePanel.setBackground(Color.BLACK);
         g.setFont(immortal.deriveFont(Font.BOLD, 77F));
         String text = "TEST";
         int x = gamePanel.screenWidth / 2 - 144;
@@ -41,7 +40,6 @@ public class Screens {
 
         g.setColor(Color.black);
         g.drawString(text, x, y);
-
 
         //x = gamePanel.screenWidth / 2 - (gamePanel.tileSize * 4) / 2 - 175;
         // y += gamePanel.tileSize * 2;
@@ -72,7 +70,7 @@ public class Screens {
         }
     }
 
-    public void drawCharacterCreation(Graphics2D g) {
+     public void drawCharacterCreation(Graphics2D g) {
         gamePanel.setOpaque(true);
         gamePanel.setBackground(Color.BLACK);
         if (pgNum == 0) {
@@ -85,6 +83,11 @@ public class Screens {
             g.drawString(text, x + 2, y + 5);
 
             y += gamePanel.tileSize * 6;
+            g.setColor(Color.black);
+            g.drawRect(x - 50, y - 25, 400, 200);
+            g.setColor(Color.WHITE);
+            g.drawRect(x- 25, y - 10, 300, 150);
+            g.setColor(Color.BLACK);
             g.drawString(textBox, x, y);
         } else if (pgNum == 1) {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
@@ -123,25 +126,54 @@ public class Screens {
                 g.drawString(">", x - gamePanel.tileSize, y - 8);
             }
         }
+    }
 
-            /*
+
+
+    /* public void drawInGameMenu(Graphics2D g) {
+        gamePanel.setOpaque(true);
+        gamePanel.setBackground(Color.BLACK);
+        g.setFont(immortal.deriveFont(Font.BOLD, 77F));
         String text = "TEST";
-        int x = gamePanel.screenWidth / 3 - 144;
+        int x = gamePanel.screenWidth / 2 - 144;
         int y = gamePanel.tileSize * 3;
 
         g.setColor(Color.black);
-        g.drawString(text, x + 2, y+5);
+        g.drawString(text, x + 2, y + 5);
 
+        g.setColor(Color.black);
+        g.drawString(text, x, y);
+
+        //x = gamePanel.screenWidth / 2 - (gamePanel.tileSize * 4) / 2 - 175;
+        // y += gamePanel.tileSize * 2;
+        // g.drawImage(gamePanel.player.down1, x , y, gamePanel.tileSize * 4, gamePanel.tileSize * 4, null);
+
+        g.setFont(immortal.deriveFont(Font.BOLD, 77F));
+
+        text = "NEW GAME";
         y += gamePanel.tileSize * 6;
-        g.drawString("BANANANAA", x, y);
+        x -= 125;
+        g.drawString(text, x, y);
+        if (optionNum == 0) {
+            g.drawString(">", x - gamePanel.tileSize, y - 8);
+        }
 
-             */
+        text = "LOAD GAME";
+        y += 100;
+        g.drawString(text, x, y);
+        if (optionNum == 1) {
+            g.drawString(">", x - gamePanel.tileSize, y - 8);
+        }
 
+        text = "QUIT";
+        y += 100;
+        g.drawString(text, x, y);
+        if (optionNum == 2) {
+            g.drawString(">", x - gamePanel.tileSize, y - 8);
+        }
     }
 
-    public void drawInGameMenu(Graphics2D g) {
-
-    }
+     */
 
     public void drawBattle(Graphics2D g) {
 

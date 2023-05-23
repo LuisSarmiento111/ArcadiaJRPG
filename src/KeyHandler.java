@@ -25,11 +25,11 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (gp.titleScreen) {
             onTitleScreen(e);
-        }
-        if (gp.characterCreationScreen) {
+        } else if (gp.characterCreationScreen) {
             onCharacterCreationScreen(e);
+        } else if (gp.menuScreen) {
+            onMenuScreen(e);
         } else {
-
             if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
                 upPressed = true;
             }
@@ -44,6 +44,9 @@ public class KeyHandler implements KeyListener {
             }
             if (e.getKeyChar() == 'p') {
                 gp.titleScreen = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyChar() == 'm') {
+                gp.menuScreen = true;
             }
         }
     }
@@ -80,7 +83,7 @@ public class KeyHandler implements KeyListener {
             if (e.getKeyCode() == KeyEvent.VK_ENTER && gp.screens.textBox.length() != 0) {
                 gp.screens.pgNum = 1;
             }
-            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && gp.screens.textBox.length() != 0) {
+            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && gp.screens.textBox.length() > 0) {
                 gp.screens.textBox = gp.screens.textBox.substring(0, gp.screens.textBox.length() - 1);
             } else {
                 if (gp.screens.textBox.length() + 1 <= 14) {
@@ -114,6 +117,10 @@ public class KeyHandler implements KeyListener {
                 gp.inGame = true;
             }
         }
+    }
+
+    public void onMenuScreen(KeyEvent e) {
+
     }
 
     @Override

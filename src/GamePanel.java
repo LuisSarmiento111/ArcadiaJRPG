@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel(JRPG JRPG) {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-
+        this.setOpaque(true);
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
 
@@ -79,13 +79,16 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         g2.clearRect(0, 0, screenWidth, screenHeight);
         if (titleScreen) {
-            screens.drawTitleScreen(g2); // fix arrows not updating correctly
+            screens.drawTitleScreen(g2);
         } else if (characterCreationScreen) {
             screens.drawCharacterCreation(g2);
         } else {
             JRPG.player.draw(g2);
-            g2.dispose();
+            if (menuScreen) {
+                // screens.drawInGameMenu(g2);
+            }
         }
+        g2.dispose();
     }
 
     public void endGame() {

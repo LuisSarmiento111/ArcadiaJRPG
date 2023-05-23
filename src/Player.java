@@ -71,7 +71,7 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if (gamePanel.inGame) {
+        if (gamePanel.inGame && !gamePanel.menuScreen) {
             if (gamePanel.keyHandler.isUpPressed() || gamePanel.keyHandler.isDownPressed() ||
                     gamePanel.keyHandler.isLeftPressed() || gamePanel.keyHandler.isRightPressed()) {
                 if (gamePanel.keyHandler.isUpPressed()) {
@@ -95,7 +95,7 @@ public class Player extends Entity {
                     gamePanel.inGame = false;
                 }
                 spriteCounter++;
-                if (spriteCounter > 10) {
+                if (spriteCounter > 7) {
                     spriteNum++;
                     spriteCounter = 0;
                 }
@@ -133,7 +133,7 @@ public class Player extends Entity {
                 image = sprites[spriteNum];
                 break;
         }
-        g2.drawString(name.substring(1), xCoordinate + 35, yCoordinate);
+        g2.drawString(name, xCoordinate + 35 - name.length() / 2, yCoordinate);
         g2.drawImage(image, xCoordinate , yCoordinate, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
     }
 
