@@ -128,8 +128,6 @@ public class Screens {
         }
     }
 
-
-
     /* public void drawInGameMenu(Graphics2D g) {
         gamePanel.setOpaque(true);
         gamePanel.setBackground(Color.BLACK);
