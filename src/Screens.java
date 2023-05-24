@@ -91,7 +91,6 @@ public class Screens {
             g.setColor(Color.BLACK);
             g.drawString(textBox, x + 25, y + 60);
 
-
         } else if (pgNum == 1) {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
             String text = "Select your class!";
