@@ -125,6 +125,7 @@ public class KeyHandler implements KeyListener {
         }
     }
 
+
     public void onMenuScreen(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyChar() == 'm') {
             gp.menuScreen = false;
