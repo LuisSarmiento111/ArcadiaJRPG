@@ -33,7 +33,7 @@ public class Screens {
         g.setFont(immortal.deriveFont(Font.BOLD, 77F));
         String text = "TEST";
         int x = gamePanel.screenWidth / 2;
-        int y = gamePanel.tileSize * 3;
+        int y = (int) (gamePanel.screenHeight * .1);
 
         g.setColor(Color.black);
         g.drawString(text, x - getCenterOfText(text, g)+ 2, y + 5);
@@ -76,28 +76,27 @@ public class Screens {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
             String text = "What is your name?";
             int x = gamePanel.screenWidth / 2;
-            int y = gamePanel.tileSize * 3;
+            int y = (int) (gamePanel.screenHeight * .1);
 
             g.setColor(Color.black);
             g.drawString(text, x - getCenterOfText(text, g), y + 5);
 
-            x = gamePanel.screenWidth / 2 - 700;
+            x = (int) (gamePanel.screenWidth * .1);
             y += gamePanel.tileSize * 6;
             g.setColor(Color.black);
-            g.drawRect(x - 70, y - 60, 1400, 80);
-            g.setColor(Color.WHITE);
-            g.drawRect(x, y , 900, 70);
+            g.drawRect(x, y, (int) (gamePanel.screenWidth * .8), 80);
 
 
+            x = (int) (gamePanel.screenWidth * .1);
             g.setColor(Color.BLACK);
-            g.drawString(textBox, x - 90, y);
+            g.drawString(textBox, x + 25, y + 60);
 
 
         } else if (pgNum == 1) {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
             String text = "Select your class!";
             int x = gamePanel.screenWidth / 2;
-            int y = gamePanel.screenHeight / 2;
+            int y = (int) (gamePanel.screenHeight * .1);
 
             g.setColor(Color.black);
             g.drawString(text, x - getCenterOfText(text, g), y + 5);
@@ -105,8 +104,8 @@ public class Screens {
             g.setFont(immortal.deriveFont(Font.BOLD, 77F));
 
             text = "Paladin";
-            y += gamePanel.tileSize * 6;
-            x = 200;
+            y = gamePanel.screenHeight / 2;
+            x = (int) (gamePanel.screenWidth * .1);
             g.drawString(text, x, y);
             if (optionNum == 0) {
                 g.drawString(">", x - gamePanel.tileSize, y - 8);

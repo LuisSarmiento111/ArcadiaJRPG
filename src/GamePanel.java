@@ -5,8 +5,8 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
     final int scale = 3;
     final int tileSize = originalTileSize * scale;
-    final int screenWidth = 1920;
-    final int screenHeight = 1080;
+    final int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    final int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
     final int FPS = 60;
     public KeyHandler keyHandler;
     public JRPG JRPG;
