@@ -32,14 +32,14 @@ public class Screens {
     public void drawTitleScreen(Graphics2D g) {
         g.setFont(immortal.deriveFont(Font.BOLD, 77F));
         String text = "TEST";
-        int x = gamePanel.screenWidth / 2 - 144;
+        int x = gamePanel.screenWidth / 2;
         int y = gamePanel.tileSize * 3;
 
         g.setColor(Color.black);
-        g.drawString(text, x + 2, y + 5);
+        g.drawString(text, x - getCenterOfText(text, g)+ 2, y + 5);
 
         g.setColor(Color.black);
-        g.drawString(text, x, y);
+        g.drawString(text, x- getCenterOfText(text, g), y);
 
         //x = gamePanel.screenWidth / 2 - (gamePanel.tileSize * 4) / 2 - 175;
         // y += gamePanel.tileSize * 2;
@@ -49,24 +49,23 @@ public class Screens {
 
         text = "NEW GAME";
         y += gamePanel.tileSize * 6;
-        x -= 125;
-        g.drawString(text, x, y);
+        g.drawString(text, x- getCenterOfText(text, g), y);
         if (optionNum == 0) {
-            g.drawString(">", x - gamePanel.tileSize, y - 8);
+            g.drawString(">", x- getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
         }
 
         text = "LOAD GAME";
         y += 100;
-        g.drawString(text, x, y);
+        g.drawString(text, x- getCenterOfText(text, g), y);
         if (optionNum == 1) {
-            g.drawString(">", x - gamePanel.tileSize, y - 8);
+            g.drawString(">", x- getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
         }
 
         text = "QUIT";
         y += 100;
-        g.drawString(text, x, y);
+        g.drawString(text, x- getCenterOfText(text, g), y);
         if (optionNum == 2) {
-            g.drawString(">", x - gamePanel.tileSize, y - 8);
+            g.drawString(">", x- getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
         }
     }
 
@@ -76,27 +75,32 @@ public class Screens {
         if (pgNum == 0) {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
             String text = "What is your name?";
-            int x = gamePanel.screenWidth / 3 - 144;
+            int x = gamePanel.screenWidth / 2;
             int y = gamePanel.tileSize * 3;
 
             g.setColor(Color.black);
-            g.drawString(text, x + 2, y + 5);
+            g.drawString(text, x - getCenterOfText(text, g), y + 5);
 
+            x = gamePanel.screenWidth / 2 - 700;
             y += gamePanel.tileSize * 6;
             g.setColor(Color.black);
-            g.drawRect(x - 50, y - 25, 400, 200);
+            g.drawRect(x - 70, y - 60, 1400, 80);
             g.setColor(Color.WHITE);
-            g.drawRect(x- 25, y - 10, 300, 150);
+            g.drawRect(x, y , 900, 70);
+
+
             g.setColor(Color.BLACK);
-            g.drawString(textBox, x, y);
+            g.drawString(textBox, x - 90, y);
+
+
         } else if (pgNum == 1) {
             g.setFont(immortal.deriveFont(Font.PLAIN, 77F));
-            String text = "Choose a class";
-            int x = gamePanel.screenWidth / 3;
-            int y = gamePanel.tileSize * 3;
+            String text = "Select your class!";
+            int x = gamePanel.screenWidth / 2;
+            int y = gamePanel.screenHeight / 2;
 
             g.setColor(Color.black);
-            g.drawString(text, x + 2, y + 5);
+            g.drawString(text, x - getCenterOfText(text, g), y + 5);
 
             g.setFont(immortal.deriveFont(Font.BOLD, 77F));
 
@@ -129,50 +133,39 @@ public class Screens {
     }
 
 
-    /* public void drawInGameMenu(Graphics2D g) {
-        gamePanel.setOpaque(true);
-        gamePanel.setBackground(Color.BLACK);
-        g.setFont(immortal.deriveFont(Font.BOLD, 77F));
-        String text = "TEST";
-        int x = gamePanel.screenWidth / 2 - 144;
-        int y = gamePanel.tileSize * 3;
+     public void drawInGameMenu(Graphics2D g) {
+        g.setColor(Color.BLACK);
+        String text = "PAUSED";
+        g.setFont(immortal.deriveFont(Font.BOLD, 80F));
+        int x = gamePanel.screenWidth / 2;
+        int y = 250;
+        g.drawString(text, x - getCenterOfText(text, g), y);
 
-        g.setColor(Color.black);
-        g.drawString(text, x + 2, y + 5);
+         g.setFont(immortal.deriveFont(Font.BOLD, 77F));
 
-        g.setColor(Color.black);
-        g.drawString(text, x, y);
+         text = "RESUME";
+         y += gamePanel.tileSize * 6;
+         g.drawString(text, x - getCenterOfText(text, g), y);
+         if (optionNum == 0) {
+             g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
+         }
 
-        //x = gamePanel.screenWidth / 2 - (gamePanel.tileSize * 4) / 2 - 175;
-        // y += gamePanel.tileSize * 2;
-        // g.drawImage(gamePanel.player.down1, x , y, gamePanel.tileSize * 4, gamePanel.tileSize * 4, null);
+         text = "SETTINGS";
+         y += 100;
+         g.drawString(text, x- getCenterOfText(text, g), y);
+         if (optionNum == 1) {
+             g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
+         }
 
-        g.setFont(immortal.deriveFont(Font.BOLD, 77F));
-
-        text = "NEW GAME";
-        y += gamePanel.tileSize * 6;
-        x -= 125;
-        g.drawString(text, x, y);
-        if (optionNum == 0) {
-            g.drawString(">", x - gamePanel.tileSize, y - 8);
-        }
-
-        text = "LOAD GAME";
-        y += 100;
-        g.drawString(text, x, y);
-        if (optionNum == 1) {
-            g.drawString(">", x - gamePanel.tileSize, y - 8);
-        }
-
-        text = "QUIT";
-        y += 100;
-        g.drawString(text, x, y);
-        if (optionNum == 2) {
-            g.drawString(">", x - gamePanel.tileSize, y - 8);
-        }
+         text = "MAIN MENU";
+         y += 100;
+         g.drawString(text, x- getCenterOfText(text, g), y);
+         if (optionNum == 2) {
+             g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
+         }
     }
 
-     */
+
 
     public void drawBattle(Graphics2D g) {
 
@@ -180,5 +173,10 @@ public class Screens {
 
     public void drawDeathScreen(Graphics2D g) {
 
+    }
+
+    public int getCenterOfText(String text, Graphics2D g) {
+        int length = (int)g.getFontMetrics().getStringBounds(text, g).getWidth();
+        return length / 2;
     }
 }

@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean titleScreen;
     public boolean menuScreen;
     public boolean gameOver;
+    public boolean settingScreen;
     public boolean battleScreen;
     Thread gameThread;
 
@@ -34,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         inGame = false;
         titleScreen = true;
+        settingScreen = false;
         menuScreen = false;
         gameOver = false;
         battleScreen = false;
@@ -85,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else {
             JRPG.player.draw(g2);
             if (menuScreen) {
-                // screens.drawInGameMenu(g2);
+                screens.drawInGameMenu(g2);
             }
         }
         g2.dispose();

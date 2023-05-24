@@ -11,14 +11,13 @@ public class Player extends Entity {
     private String playerClass;
     private int playerLevel;
     private int experience;
-    private String UID;
-    private BufferedImage playerSprite;
+    private String spriteUID;
+    private final int  walkSpeed = 2;
     public final BufferedImage[] sprites = new BufferedImage[36];
 
     public String direction;
 
     private final String[][] classes = {{"Knight", "8"}, {"Mage", "5"}};
-    private KeyHandler keyHandler;
     private GamePanel gamePanel;
 
     public Player(JRPG game, GamePanel gamePanel, String name, String playerClass) {
@@ -33,7 +32,7 @@ public class Player extends Entity {
 
         this.playerClass = playerClass;
         direction = "up";
-        UID = "022612111220";
+        spriteUID = "022612111220";
         setStats();
         playerLevel = 1;
         experience = 0;
@@ -51,7 +50,7 @@ public class Player extends Entity {
             for (int i = 0; i < 4; i++) {
                 int x = 0;
                 for (int j = 0; j < 9; j++) {
-                    sprites[index] = ImageIO.read(new File(("Sprites/" + UID + ".png"))).getSubimage(x, y, 64, 64);
+                    sprites[index] = ImageIO.read(new File(("Sprites/" + spriteUID + ".png"))).getSubimage(x, y, 64, 64);
                     x += 64;
                     index++;
                 }
@@ -73,22 +72,22 @@ public class Player extends Entity {
     public void update() {
         if (gamePanel.inGame && !gamePanel.menuScreen) {
             if (gamePanel.keyHandler.isUpPressed() || gamePanel.keyHandler.isDownPressed() ||
-                    gamePanel.keyHandler.isLeftPressed() || gamePanel.keyHandler.isRightPressed()) {
+                    gamePanel.keyHandler.isLeftPressed() || gamePanel.keyHandler.isRightPressed() || gamePanel.keyHandler.isShiftPressed()){
                 if (gamePanel.keyHandler.isUpPressed()) {
                     direction = "up";
-                    yCoordinate -= 4;
+                    yCoordinate -= walkSpeed;
                 }
                 if (gamePanel.keyHandler.isDownPressed()) {
                     direction = "down";
-                    yCoordinate += 4;
+                    yCoordinate += walkSpeed;
                 }
                 if (gamePanel.keyHandler.isRightPressed()) {
                     direction = "right";
-                    xCoordinate += 4;
+                    xCoordinate += walkSpeed;
                 }
                 if (gamePanel.keyHandler.isLeftPressed()) {
                     direction = "left";
-                    xCoordinate -= 4;
+                    xCoordinate -= walkSpeed;
                 }
                 if(gamePanel.keyHandler.isMenuPressed()) {
                     gamePanel.titleScreen = true;
@@ -106,7 +105,6 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
-
         switch (direction) {
             case "up":
                 if (spriteNum > 8 || spriteNum < 0) {
