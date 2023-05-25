@@ -11,7 +11,6 @@ public class GamePanel extends JPanel implements Runnable {
     public KeyHandler keyHandler;
     public JRPG JRPG;
     public Screens screens;
-    public Player player;
     public boolean inGame;
     public boolean characterCreationScreen;
     public boolean titleScreen;
@@ -47,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void run() {
-        double drawInterval = 1000000000 / 60;
+        double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
         while (gameThread != null) {
             update();

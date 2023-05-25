@@ -133,18 +133,20 @@ public class KeyHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             gp.screens.optionNum--;
             if (gp.screens.optionNum < 0) {
-                gp.screens.optionNum = 2;
+                gp.screens.optionNum = 3;
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
             gp.screens.optionNum++;
-            if (gp.screens.optionNum > 2) {
+            if (gp.screens.optionNum > 3) {
                 gp.screens.optionNum = 0;
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             if (gp.screens.optionNum == 0) {
             } else if (gp.screens.optionNum == 1) {
+                PlayerDataStorage.savePlayerData(gp.JRPG.player, 2);
+            } else if (gp.screens.optionNum == 2){
                 gp.settingScreen = true;
             } else {
                 gp.titleScreen = true;

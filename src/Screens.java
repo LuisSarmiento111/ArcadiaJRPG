@@ -41,9 +41,6 @@ public class Screens {
         g.setColor(Color.black);
         g.drawString(text, x- getCenterOfText(text, g), y);
 
-        //x = gamePanel.screenWidth / 2 - (gamePanel.tileSize * 4) / 2 - 175;
-        // y += gamePanel.tileSize * 2;
-        // g.drawImage(gamePanel.player.down1, x , y, gamePanel.tileSize * 4, gamePanel.tileSize * 4, null);
 
         g.setFont(immortal.deriveFont(Font.BOLD, 77F));
 
@@ -148,17 +145,24 @@ public class Screens {
              g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
          }
 
+         text = "SAVE GAME";
+         y += 100;
+         g.drawString(text, x - getCenterOfText(text, g), y);
+         if (optionNum == 1) {
+             g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
+         }
+
          text = "SETTINGS";
          y += 100;
          g.drawString(text, x- getCenterOfText(text, g), y);
-         if (optionNum == 1) {
+         if (optionNum == 2) {
              g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
          }
 
          text = "MAIN MENU";
          y += 100;
          g.drawString(text, x- getCenterOfText(text, g), y);
-         if (optionNum == 2) {
+         if (optionNum == 3) {
              g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
          }
     }
