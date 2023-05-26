@@ -31,7 +31,9 @@ public class KeyHandler implements KeyListener {
             onCharacterCreationScreen(e);
         } else if (gp.menuScreen) {
             onMenuScreen(e);
-        } else {
+        } else if (gp.characterSelectionScreen) {
+            onCharacterSelectionScreen(e);
+        }else {
             if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
                 upPressed = true;
             }
@@ -74,8 +76,9 @@ public class KeyHandler implements KeyListener {
                 gp.screens.textBox = "";
                 gp.screens.pgNum = 0;
                 gp.characterCreationScreen = true;
-            } else if (gp.screens.optionNum == 1 && gp.JRPG.player != null) {
-                gp.inGame = true;
+            } else if (gp.screens.optionNum == 1) {
+                gp.screens.pgNum = 0;
+                gp.characterSelectionScreen = true;
             } else {
                 gp.endGame();
             }
@@ -87,6 +90,7 @@ public class KeyHandler implements KeyListener {
         if (gp.screens.pgNum == 0) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER && gp.screens.textBox.length() != 0) {
                 gp.screens.pgNum = 1;
+                gp.screens.optionNum = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && gp.screens.textBox.length() > 0) {
                 gp.screens.textBox = gp.screens.textBox.substring(0, gp.screens.textBox.length() - 1);
@@ -121,6 +125,54 @@ public class KeyHandler implements KeyListener {
                 }
                 gp.characterCreationScreen = false;
                 gp.inGame = true;
+            }
+        }
+    }
+
+    public void onCharacterSelectionScreen(KeyEvent e) {
+        if (gp.screens.pgNum == 0) {
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                gp.screens.optionNum--;
+                if (gp.screens.optionNum < 0) {
+                    gp.screens.optionNum = 3;
+                }
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                gp.screens.optionNum++;
+                if (gp.screens.optionNum > 3) {
+                    gp.screens.optionNum = 0;
+                }
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            if (gp.screens.optionNum > 3) {
+                gp.screens.optionNum = 0;
+            } else {
+                gp.screens.optionNum = 4;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            if (gp.screens.optionNum > 3) {
+                gp.screens.optionNum = 0;
+            } else {
+                gp.screens.optionNum = 4;
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            gp.titleScreen = true;
+            gp.characterSelectionScreen = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (gp.screens.pgNum == 1) {
+                gp.screens.pgNum = 0;
+            } else {
+                if (PlayerDataStorage.loadPlayerData(gp.screens.optionNum + 1, gp) != null) {
+                    gp.JRPG.player = PlayerDataStorage.loadPlayerData(gp.screens.optionNum + 1, gp);
+                    gp.characterSelectionScreen = false;
+                    gp.inGame = true;
+                } else {
+                    gp.screens.pgNum = 1;
+                }
             }
         }
     }

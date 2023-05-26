@@ -13,8 +13,8 @@ public class PlayerDataStorage {
             for (int i = 0; i < playerData.size(); i++) {
                 if (i + 1 == slot) {
                     fw.write("LoadFile" + slot + ": " + player.name);
-                    fw.write(" | " + player.getPlayerClass());
-                    fw.write(" | " + player.getxCoordinate() + " | " + player.getyCoordinate());
+                    fw.write("|" + player.getPlayerClass());
+                    fw.write("|" + player.getxCoordinate() + "|" + player.getyCoordinate());
                 } else {
                     fw.write(playerData.get(i));
                 }
@@ -41,18 +41,15 @@ public class PlayerDataStorage {
         catch (FileNotFoundException noFile) {
             return null;
         }
-        for (String string : playerData) {
-            System.out.println(string);
-        }
         return playerData;
     }
 
-    public static Player loadPlayerData(int loadNum, GamePanel gp) {
-        String playerData = getPlayerData().get(loadNum - 1);
-        playerData.substring(playerData.indexOf(":") + 2);
+    public static Player loadPlayerData(int slot, GamePanel gp) {
+        String playerData = getPlayerData().get(slot - 1);
         if (!playerData.contains("|")) {
             return null;
         } else {
+            playerData = playerData.substring(playerData.indexOf(":") + 2);
             String[] data = playerData.split("\\|");
             return new Player(gp.JRPG, gp, data[0], data[1]);
         }

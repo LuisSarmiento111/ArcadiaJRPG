@@ -2,6 +2,7 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class Screens {
     public Font immortal;
@@ -165,6 +166,53 @@ public class Screens {
          if (optionNum == 3) {
              g.drawString(">", x - getCenterOfText(text, g) - gamePanel.tileSize, y - 8);
          }
+    }
+
+    public void drawCharacterSelection(Graphics2D g) {
+        g.setColor(Color.BLACK);
+        String text = "Select a load slot:";
+        g.setFont(immortal.deriveFont(Font.BOLD, 80F));
+        int x = gamePanel.screenWidth / 2;
+        int y = 250;
+        g.drawString(text, x - getCenterOfText(text, g), y);
+
+        y += gamePanel.tileSize * 6;
+        ArrayList<String> playerSlotData = PlayerDataStorage.getPlayerData();
+        for (int i = 0; i < playerSlotData.size(); i++) {
+            g.setFont(immortal.deriveFont(Font.BOLD, 77F));
+            x = 600;
+            text = "LOAD " +(i + 1) + ": ";
+            String slot = playerSlotData.get(i);
+            if (!slot.contains("|")) {
+                text += "EMPTY";
+            } else {
+                slot = slot.substring(slot.indexOf(":") + 2);
+                String[] data = slot.split("\\|");
+                text += data[0];
+            }
+            g.drawString(text, x, y);
+            if (optionNum == i) {
+                g.drawString(">", x - gamePanel.tileSize, y - 8);
+            }
+            y += 100;
+        }
+        if (pgNum == 1) {
+            y = 350;
+            g.setFont(immortal.deriveFont(Font.PLAIN, 40));
+            text = "NO CHARACTER DATA FOR SELECTED SLOT";
+            x = (gamePanel.screenWidth / 2) - getCenterOfText(text, g);
+            g.drawString(text, x, y);
+            y += 50;
+            text = "WOULD YOU LIKE TO CREATE A NEW CHARACTER?";
+            x = (gamePanel.screenWidth / 2) - getCenterOfText(text, g);
+            g.drawString(text,x, y);
+        }
+        g.setFont(immortal.deriveFont(Font.BOLD, 40));
+        g.drawString("BACK TO MENU", 25, gamePanel.tileSize);
+        if (optionNum == 4) {
+            g.drawString(">", 5, gamePanel.tileSize);
+        }
+
     }
 
 

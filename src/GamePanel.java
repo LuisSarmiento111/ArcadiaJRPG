@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean gameOver;
     public boolean settingScreen;
     public boolean battleScreen;
+    public boolean characterSelectionScreen;
     Thread gameThread;
 
     public GamePanel(JRPG JRPG) {
@@ -83,6 +84,8 @@ public class GamePanel extends JPanel implements Runnable {
             screens.drawTitleScreen(g2);
         } else if (characterCreationScreen) {
             screens.drawCharacterCreation(g2);
+        } else if (characterSelectionScreen) {
+            screens.drawCharacterSelection(g2);
         } else {
             JRPG.player.draw(g2);
             if (menuScreen) {
