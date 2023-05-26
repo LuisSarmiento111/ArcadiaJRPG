@@ -1,48 +1,63 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerDataStorage {
 
-
     public static void savePlayerData(Player player, int slot) {
+        ArrayList<String> playerData = getPlayerData();
         try {
-            File file = new File("src/playerData.txt");
-            file.createNewFile();
-            FileWriter fw = new FileWriter(file);
-            String[] playerData = getPlayerData();
-            for (int i = 0; i < playerData.length; i++) {
+            File f = new File("src/playerData.txt");
+            f.createNewFile();
+            FileWriter fw = new FileWriter(f);
+            for (int i = 0; i < playerData.size(); i++) {
                 if (i + 1 == slot) {
-                    fw.write("LoadSlot" + slot + ": " + player.name + "\n");
+                    fw.write("LoadFile" + slot + ": " + player.name);
+                    fw.write(" | " + player.getPlayerClass());
+                    fw.write(" | " + player.getxCoordinate() + " | " + player.getyCoordinate());
                 } else {
-                    fw.write(playerData[i] + "\n");
+                    fw.write(playerData.get(i));
                 }
+                fw.write("\n");
             }
-        } catch(IOException ioe) {
-            System.out.println("Writing file failed");
-            System.out.println(ioe);
+            fw.close();
+        }
+        catch (IOException ioe) {
+            throw new RuntimeException(ioe);
         }
     }
 
-    public static String[] getPlayerData() {
-        String[] playerData = new String[4];
+    public static ArrayList<String> getPlayerData() {
+        ArrayList<String> playerData = new ArrayList<String>();
         try {
             File file = new File("src/playerData.txt");
             Scanner reader = new Scanner(file);
-            int i = 0;
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
-                playerData[i] = line;
-                i++;
+                playerData.add(line);
             }
+
         }
         catch (FileNotFoundException noFile) {
             return null;
         }
+        for (String string : playerData) {
+            System.out.println(string);
+        }
         return playerData;
     }
 
-    public static void loadPlayerData(int loadNum) {
-
+    public static Player loadPlayerData(int loadNum, GamePanel gp) {
+        String playerData = getPlayerData().get(loadNum - 1);
+        playerData.substring(playerData.indexOf(":") + 2);
+        if (!playerData.contains("|")) {
+            return null;
+        } else {
+            String[] data = playerData.split("\\|");
+            return new Player(gp.JRPG, gp, data[0], data[1]);
+        }
     }
 
 }
+
+
