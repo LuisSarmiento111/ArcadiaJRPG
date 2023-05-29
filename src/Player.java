@@ -16,11 +16,12 @@ public class Player extends Entity {
     public final BufferedImage[] sprites = new BufferedImage[36];
 
     public String direction;
+    public int saveSlot;
 
     private final String[][] classes = {{"Knight", "8"}, {"Mage", "5"}};
     private GamePanel gamePanel;
 
-    public Player(JRPG game, GamePanel gamePanel, String name, String playerClass) {
+    public Player(JRPG game, GamePanel gamePanel, String name, String playerClass, int saveSlot) {
         super(name, game, gamePanel);
         xCoordinate = (gamePanel.screenWidth - gamePanel.tileSize)/ 2-  gamePanel.tileSize / 2;
         yCoordinate = (gamePanel.screenHeight - gamePanel.tileSize) / 2 - gamePanel.tileSize / 2;
@@ -36,6 +37,7 @@ public class Player extends Entity {
         setStats();
         playerLevel = 1;
         experience = 0;
+        this.saveSlot = saveSlot;
 
         getPlayerImage();
 

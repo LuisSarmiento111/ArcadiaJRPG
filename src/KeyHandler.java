@@ -72,7 +72,7 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (gp.screens.optionNum == 0) {
+            if (gp.screens.optionNum == 0 && PlayerDataStorage.getEmptySlot() != 5) {
                 gp.screens.textBox = "";
                 gp.screens.pgNum = 0;
                 gp.characterCreationScreen = true;
@@ -114,15 +114,17 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                int slot = PlayerDataStorage.getEmptySlot();
                 if (gp.screens.optionNum == 0) {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Paladin");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Paladin", slot);
                 } else if (gp.screens.optionNum == 1) {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Mage");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Mage", slot);
                 } else if (gp.screens.optionNum == 2) {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Rouge");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Rouge", slot);
                 } else {
-                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Fighter");
+                    gp.JRPG.player = new Player(gp.JRPG, gp, gp.screens.textBox, "Fighter", slot);
                 }
+                PlayerDataStorage.savePlayerData(gp.JRPG.player, gp.JRPG.player.saveSlot);
                 gp.characterCreationScreen = false;
                 gp.inGame = true;
             }
@@ -145,26 +147,53 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
-            if (gp.screens.optionNum > 3) {
-                gp.screens.optionNum = 0;
+            if (gp.screens.pgNum == 0) {
+                if (gp.screens.optionNum > 3) {
+                    gp.screens.optionNum = 0;
+                } else {
+                    gp.screens.optionNum = 4;
+                }
             } else {
-                gp.screens.optionNum = 4;
+                if (gp.screens.optionNum == 5) {
+                    gp.screens.optionNum = 6;
+                } else {
+                    gp.screens.optionNum = 5;
+                }
             }
+
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
-            if (gp.screens.optionNum > 3) {
-                gp.screens.optionNum = 0;
+            if (gp.screens.pgNum == 0) {
+                if (gp.screens.optionNum > 3) {
+                    gp.screens.optionNum = 0;
+                } else {
+                    gp.screens.optionNum = 4;
+                }
             } else {
-                gp.screens.optionNum = 4;
+                if (gp.screens.optionNum == 5) {
+                    gp.screens.optionNum = 6;
+                } else {
+                    gp.screens.optionNum = 5;
+                }
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             gp.titleScreen = true;
             gp.characterSelectionScreen = false;
+            gp.screens.optionNum = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             if (gp.screens.pgNum == 1) {
+                if (gp.screens.optionNum == 5) {
+                    gp.characterCreationScreen = true;
+                    gp.characterSelectionScreen = false;
+                }
                 gp.screens.pgNum = 0;
+                gp.screens.optionNum = 0;
+            } else if (gp.screens.optionNum == 4) {
+                gp.titleScreen = true;
+                gp.characterSelectionScreen = false;
+                gp.screens.optionNum = 0;
             } else {
                 if (PlayerDataStorage.loadPlayerData(gp.screens.optionNum + 1, gp) != null) {
                     gp.JRPG.player = PlayerDataStorage.loadPlayerData(gp.screens.optionNum + 1, gp);
@@ -172,6 +201,7 @@ public class KeyHandler implements KeyListener {
                     gp.inGame = true;
                 } else {
                     gp.screens.pgNum = 1;
+                    gp.screens.optionNum = 5;
                 }
             }
         }
@@ -197,7 +227,7 @@ public class KeyHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             if (gp.screens.optionNum == 0) {
             } else if (gp.screens.optionNum == 1) {
-                PlayerDataStorage.savePlayerData(gp.JRPG.player, 2);
+                PlayerDataStorage.savePlayerData(gp.JRPG.player, gp.JRPG.player.saveSlot);
             } else if (gp.screens.optionNum == 2){
                 gp.settingScreen = true;
             } else {

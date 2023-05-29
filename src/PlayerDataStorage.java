@@ -36,7 +36,6 @@ public class PlayerDataStorage {
                 String line = reader.nextLine();
                 playerData.add(line);
             }
-
         }
         catch (FileNotFoundException noFile) {
             return null;
@@ -51,8 +50,18 @@ public class PlayerDataStorage {
         } else {
             playerData = playerData.substring(playerData.indexOf(":") + 2);
             String[] data = playerData.split("\\|");
-            return new Player(gp.JRPG, gp, data[0], data[1]);
+            return new Player(gp.JRPG, gp, data[0], data[1], slot);
         }
+    }
+
+    public static int getEmptySlot() {
+        ArrayList<String> playerData = getPlayerData();
+        for (int i = 0; i < playerData.size(); i++) {
+            if (!playerData.get(i).contains("|")) {
+                return i + 1;
+            }
+        }
+        return 5;
     }
 
 }

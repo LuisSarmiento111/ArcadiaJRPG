@@ -197,15 +197,28 @@ public class Screens {
             y += 100;
         }
         if (pgNum == 1) {
-            y = 350;
-            g.setFont(immortal.deriveFont(Font.PLAIN, 40));
+            y = 325;
+            g.setFont(immortal.deriveFont(Font.BOLD, 40));
             text = "NO CHARACTER DATA FOR SELECTED SLOT";
             x = (gamePanel.screenWidth / 2) - getCenterOfText(text, g);
             g.drawString(text, x, y);
             y += 50;
-            text = "WOULD YOU LIKE TO CREATE A NEW CHARACTER?";
+            text = "WOULD YOU LIKE TO CREATE A NEW CHARACTER FOR?";
             x = (gamePanel.screenWidth / 2) - getCenterOfText(text, g);
             g.drawString(text,x, y);
+            y += 50;
+            text = "YES";
+            x = gamePanel.screenWidth / 2 - getCenterOfText(text, g) * 4;
+            g.drawString(text, x, y);
+            if (optionNum == 5) {
+                g.drawString(">", x - gamePanel.tileSize, y - 8);
+            }
+            x = gamePanel.screenWidth / 2 + getCenterOfText(text, g) * 2;
+            text = "NO";
+            g.drawString(text, x, y);
+            if (optionNum == 6) {
+                g.drawString(">", x - gamePanel.tileSize, y - 8);
+            }
         }
         g.setFont(immortal.deriveFont(Font.BOLD, 40));
         g.drawString("BACK TO MENU", 25, gamePanel.tileSize);
