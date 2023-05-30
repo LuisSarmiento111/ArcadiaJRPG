@@ -6,8 +6,8 @@ public class Entity {
     public int strength;
     public int health;
     public int magicPower;
-    public int xCoordinate;
-    public int yCoordinate;
+    public int worldX;
+    public int worldY;
     public Rectangle hitBox;
     private Image image;
     public JRPG game;

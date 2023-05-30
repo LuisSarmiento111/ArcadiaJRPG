@@ -2,12 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int originalTileSize = 16;
-    final int scale = 3;
-    final int tileSize = originalTileSize * scale;
-    final int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    final int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-    final int FPS = 60;
+    public final int originalTileSize = 16;
+    public final int scale = 3;
+    public final int tileSize = originalTileSize * scale;
+    public final int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    public final int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    public final int worldHeight = 25 * tileSize;
+    public final int worldWidth = 50 * tileSize;
+    public final int FPS = 60;
     public KeyHandler keyHandler;
     public TileManager tileManager;
     public JRPG JRPG;

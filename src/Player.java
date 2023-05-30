@@ -8,9 +8,12 @@ import java.util.Objects;
 
 public class Player extends Entity {
     private ArrayList<String> inventory;
+
     private String playerClass;
     private int playerLevel;
     private int experience;
+    public int screenX;
+    public int screenY;
     private String spriteUID;
     private final int  walkSpeed = 2;
     public final BufferedImage[] sprites = new BufferedImage[36];
@@ -23,8 +26,10 @@ public class Player extends Entity {
 
     public Player(JRPG game, GamePanel gamePanel, String name, String playerClass, int saveSlot) {
         super(name, game, gamePanel);
-        xCoordinate = (gamePanel.screenWidth - gamePanel.tileSize)/ 2-  gamePanel.tileSize / 2;
-        yCoordinate = (gamePanel.screenHeight - gamePanel.tileSize) / 2 - gamePanel.tileSize / 2;
+        worldX = 4 * gamePanel.tileSize;
+        screenX = (gamePanel.screenWidth - gamePanel.tileSize)/ 2-  gamePanel.tileSize / 2;
+        worldY = 3 * gamePanel.tileSize;
+        screenY = (gamePanel.screenHeight - gamePanel.tileSize) / 2 - gamePanel.tileSize / 2;
         hitBox = new Rectangle();
         hitBox.x = 8;
         hitBox.y = 16;
@@ -77,19 +82,19 @@ public class Player extends Entity {
                     gamePanel.keyHandler.isLeftPressed() || gamePanel.keyHandler.isRightPressed() || gamePanel.keyHandler.isShiftPressed()){
                 if (gamePanel.keyHandler.isUpPressed()) {
                     direction = "up";
-                    yCoordinate -= walkSpeed;
+                    worldY -= walkSpeed;
                 }
                 if (gamePanel.keyHandler.isDownPressed()) {
                     direction = "down";
-                    yCoordinate += walkSpeed;
+                    worldY += walkSpeed;
                 }
                 if (gamePanel.keyHandler.isRightPressed()) {
                     direction = "right";
-                    xCoordinate += walkSpeed;
+                    worldX += walkSpeed;
                 }
                 if (gamePanel.keyHandler.isLeftPressed()) {
                     direction = "left";
-                    xCoordinate -= walkSpeed;
+                    worldX -= walkSpeed;
                 }
                 if(gamePanel.keyHandler.isMenuPressed()) {
                     gamePanel.titleScreen = true;
@@ -133,8 +138,8 @@ public class Player extends Entity {
                 image = sprites[spriteNum];
                 break;
         }
-        g2.drawString(name, xCoordinate + 35 - name.length() / 2, yCoordinate);
-        g2.drawImage(image, xCoordinate , yCoordinate, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
+        g2.drawString(name, screenX + 35 - name.length() / 2, screenY);
+        g2.drawImage(image, screenX , screenY, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
     }
 
     public ArrayList<String> getInventory() {
@@ -153,14 +158,7 @@ public class Player extends Entity {
         this.playerClass = playerClass;
     }
 
-    public int getxCoordinate() {
-        return xCoordinate;
-    }
 
-
-    public int getyCoordinate() {
-        return yCoordinate;
-    }
 
 
     public int getPlayerLevel() {

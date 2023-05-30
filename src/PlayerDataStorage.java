@@ -14,7 +14,7 @@ public class PlayerDataStorage {
                 if (i + 1 == slot) {
                     fw.write("LoadFile" + slot + ": " + player.name);
                     fw.write("|" + player.getPlayerClass());
-                    fw.write("|" + player.getxCoordinate() + "|" + player.getyCoordinate());
+                    fw.write("|" + player.worldX + "|" + player.worldY);
                 } else {
                     fw.write(playerData.get(i));
                 }
