@@ -9,6 +9,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
     final int FPS = 60;
     public KeyHandler keyHandler;
+    public TileManager tileManager;
     public JRPG JRPG;
     public Screens screens;
     public boolean inGame;
@@ -29,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.JRPG = JRPG;
         keyHandler = new KeyHandler(this);
+        tileManager = new TileManager(this);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         screens = new Screens(this);
@@ -87,6 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (characterSelectionScreen) {
             screens.drawCharacterSelection(g2);
         } else {
+            tileManager.draw(g2);
             JRPG.player.draw(g2);
             if (menuScreen) {
                 screens.drawInGameMenu(g2);

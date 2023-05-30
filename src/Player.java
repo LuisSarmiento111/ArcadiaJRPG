@@ -52,7 +52,7 @@ public class Player extends Entity {
             for (int i = 0; i < 4; i++) {
                 int x = 0;
                 for (int j = 0; j < 9; j++) {
-                    sprites[index] = ImageIO.read(new File(("Sprites/" + spriteUID + ".png"))).getSubimage(x, y, 64, 64);
+                    sprites[index] = ImageIO.read(new File(("sprites/" + spriteUID + ".png"))).getSubimage(x, y, 64, 64);
                     x += 64;
                     index++;
                 }

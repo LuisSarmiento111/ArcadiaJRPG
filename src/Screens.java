@@ -21,7 +21,7 @@ public class Screens {
 
     public void InitializeFont() {
         try {
-            InputStream is = new FileInputStream("Font/IMMORTAL.ttf");
+            InputStream is = new FileInputStream("fonts/IMMORTAL.ttf");
             immortal = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (IOException e) {
             e.printStackTrace();
