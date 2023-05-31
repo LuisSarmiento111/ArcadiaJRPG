@@ -8,21 +8,21 @@ public class TileManager {
 
     private GamePanel gp;
     private Tile[] tiles;
-    private Tile[][] worldMap;
+    public Tile[][] worldMap;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tiles = new Tile[1000];
-        worldMap = new Tile[50][25];
-        getTitleImage();
+        tiles = new Tile[1250];
+        worldMap = new Tile[25][50];
+        // getTitleImage();
         loadMap();
     }
 
     public void getTitleImage() {
         try {
-            for (int i = 0; i < 1000; i++) {
-                String tileNum = ("00" + i);
-                tileNum = tileNum.substring(tileNum.length() - 3);
+            for (int i = 0; i < 1250; i++) {
+                String tileNum = i + "";
+                System.out.println(tileNum + "hh");
                 tiles[i] = new Tile();
                 tiles[i].image = ImageIO.read(new File("tiles/tile" + tileNum + ".png"));
             }
@@ -32,29 +32,43 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-        int row = 0;
-        int col = 0;
-        int x = 0;
-        int y = 0;
-        while (row < 50 &&  col < 25) {
-            g2.drawImage(worldMap[row][col].image, x, y, gp.tileSize, gp.tileSize, null);
-            y += 48;
-            if (y >= gp.screenHeight) {
-                y = 0;
-                row++;
-                x += 48;
+        int worldRow = 0;
+        int worldCol = 0;
+
+        while (worldRow < gp.maxWorldRow &&  worldCol < gp.maxWorldCol) {
+            int worldX = worldCol * gp.tileSize;
+            int worldY = worldRow * gp.tileSize;
+            int screenX = worldX - gp.JRPG.player.worldX + gp.JRPG.player.screenX;
+            int screenY = worldY - gp.JRPG.player.worldY + gp.JRPG.player.screenY;
+
+            if (worldX + gp.tileSize > gp.JRPG.player.worldX - gp.JRPG.player.screenX &&
+                    worldX - gp.tileSize < gp.JRPG.player.screenX + gp.JRPG.player.screenX &&
+                    worldY + gp.tileSize > gp.JRPG.player.worldY - gp.JRPG.player.screenY &&
+                    worldY - gp.tileSize < gp.JRPG.player.screenY + gp.JRPG.player.screenY
+            ) {
+                g2.drawImage(worldMap[worldRow][worldCol].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            }
+            worldCol++;
+
+            if (worldCol == gp.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
 
     public void loadMap() {
+        int num = 0;
         try {
-            for (int x = 0; x < 50; x++) {
-                for (int y = 0; y < 25; y++) {
-                    String tileNum = ("00" + ((x+1 * y+1) -1 ));
-                    tileNum = tileNum.substring(tileNum.length() - 3);
+            for (int x = 0; x < 25; x++) {
+                for (int y = 0; y < 50; y++) {
+                    String tileNum = num + "";
+                    while (tileNum.length() < 3) {
+                        tileNum = "0" + tileNum;
+                    }
                     worldMap[x][y] = new Tile();
                     worldMap[x][y].image = ImageIO.read(new File("tiles/tile" +  tileNum + ".png"));
+                    num++;
                 }
             }
         } catch (IOException e) {

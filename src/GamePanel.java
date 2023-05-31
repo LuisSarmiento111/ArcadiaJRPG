@@ -7,11 +7,12 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tileSize = originalTileSize * scale;
     public final int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     public final int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-    public final int worldHeight = 25 * tileSize;
-    public final int worldWidth = 50 * tileSize;
+    public final int maxWorldRow = 25;
+    public final int maxWorldCol = 50;
     public final int FPS = 60;
     public KeyHandler keyHandler;
     public TileManager tileManager;
+    public CollisionChecker collisionChecker;
     public JRPG JRPG;
     public Screens screens;
     public boolean inGame;
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.JRPG = JRPG;
         keyHandler = new KeyHandler(this);
         tileManager = new TileManager(this);
+        collisionChecker = new CollisionChecker(this);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         screens = new Screens(this);

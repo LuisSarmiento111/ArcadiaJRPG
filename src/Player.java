@@ -12,29 +12,28 @@ public class Player extends Entity {
     private String playerClass;
     private int playerLevel;
     private int experience;
+    private boolean collisionOn;
     public int screenX;
     public int screenY;
     private String spriteUID;
     private final int  walkSpeed = 2;
     public final BufferedImage[] sprites = new BufferedImage[36];
-
-    public String direction;
     public int saveSlot;
 
     private final String[][] classes = {{"Knight", "8"}, {"Mage", "5"}};
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public Player(JRPG game, GamePanel gamePanel, String name, String playerClass, int saveSlot) {
         super(name, game, gamePanel);
-        worldX = 4 * gamePanel.tileSize;
+        worldX = 25 * gamePanel.tileSize;
         screenX = (gamePanel.screenWidth - gamePanel.tileSize)/ 2-  gamePanel.tileSize / 2;
-        worldY = 3 * gamePanel.tileSize;
+        worldY = 12 * gamePanel.tileSize;
         screenY = (gamePanel.screenHeight - gamePanel.tileSize) / 2 - gamePanel.tileSize / 2;
         hitBox = new Rectangle();
         hitBox.x = 8;
         hitBox.y = 16;
-        hitBox.width = gamePanel.tileSize;
-        hitBox.height = gamePanel.tileSize;
+        hitBox.width = 24;
+        hitBox.height = 24;
 
         this.playerClass = playerClass;
         direction = "up";
@@ -87,11 +86,11 @@ public class Player extends Entity {
                 if (gamePanel.keyHandler.isDownPressed()) {
                     direction = "down";
                     worldY += walkSpeed;
-                }
+                } else
                 if (gamePanel.keyHandler.isRightPressed()) {
                     direction = "right";
                     worldX += walkSpeed;
-                }
+                } else
                 if (gamePanel.keyHandler.isLeftPressed()) {
                     direction = "left";
                     worldX -= walkSpeed;
@@ -100,6 +99,9 @@ public class Player extends Entity {
                     gamePanel.titleScreen = true;
                     gamePanel.inGame = false;
                 }
+
+                collisionOn = false;
+                gamePanel.collisionChecker.checkTile(this);
                 spriteCounter++;
                 if (spriteCounter > 7) {
                     spriteNum++;

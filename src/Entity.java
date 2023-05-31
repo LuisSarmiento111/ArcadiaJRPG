@@ -8,6 +8,7 @@ public class Entity {
     public int magicPower;
     public int worldX;
     public int worldY;
+    public String direction;
     public Rectangle hitBox;
     private Image image;
     public JRPG game;
