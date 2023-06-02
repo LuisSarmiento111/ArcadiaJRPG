@@ -24,8 +24,6 @@ public class CollisionChecker {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileManager.worldMap[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileManager.worldMap[entityRightCol][entityTopRow];
-
-
                 break;
             case "down":
                 entityBottomRow = (entityBottomWorldY - entity.speed) / gp.tileSize;

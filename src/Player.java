@@ -16,7 +16,7 @@ public class Player extends Entity {
     public int screenX;
     public int screenY;
     private String spriteUID;
-    private final int  walkSpeed = 2;
+    private final int  walkSpeed = 1;
     public final BufferedImage[] sprites = new BufferedImage[36];
     public int saveSlot;
 
@@ -25,9 +25,9 @@ public class Player extends Entity {
 
     public Player(JRPG game, GamePanel gamePanel, String name, String playerClass, int saveSlot) {
         super(name, game, gamePanel);
-        worldX = 25 * gamePanel.tileSize;
+        worldX = 35 * gamePanel.tileSize;
         screenX = (gamePanel.screenWidth - gamePanel.tileSize)/ 2-  gamePanel.tileSize / 2;
-        worldY = 12 * gamePanel.tileSize;
+        worldY = 55 * gamePanel.tileSize;
         screenY = (gamePanel.screenHeight - gamePanel.tileSize) / 2 - gamePanel.tileSize / 2;
         hitBox = new Rectangle();
         hitBox.x = 8;
@@ -101,7 +101,7 @@ public class Player extends Entity {
                 }
 
                 collisionOn = false;
-                gamePanel.collisionChecker.checkTile(this);
+                // gamePanel.collisionChecker.checkTile(this);
                 spriteCounter++;
                 if (spriteCounter > 7) {
                     spriteNum++;
@@ -140,8 +140,8 @@ public class Player extends Entity {
                 image = sprites[spriteNum];
                 break;
         }
-        g2.drawString(name, screenX + 35 - name.length() / 2, screenY);
-        g2.drawImage(image, screenX , screenY, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
+        // g2.drawString(name, screenX + 35 - name.length() / 2, screenY);
+        g2.drawImage(image, screenX , screenY, 64, 64, null);
     }
 
     public ArrayList<String> getInventory() {
