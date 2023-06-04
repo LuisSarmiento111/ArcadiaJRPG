@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public class Player extends Entity {
     private ArrayList<String> inventory;
-
     private String playerClass;
     private int playerLevel;
     private int experience;

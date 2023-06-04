@@ -9,7 +9,6 @@ public class Screens {
     public int optionNum;
     public int pgNum;
     public String textBox;
-    private String confirmationBox;
     private GamePanel gamePanel;
 
     public Screens(GamePanel gp) {

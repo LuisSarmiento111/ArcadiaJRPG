@@ -64,6 +64,7 @@ public class TileManager {
                     while (tileNum.length() < 2) {
                         tileNum = "0" + tileNum;
                     }
+                    System.out.println("" + tileNum + "  " + x + "  " + y);
                     worldMap[x][y] = new Tile();
                     worldMap[x][y].image = ImageIO.read(new File("maps/map/" + tileNum + "_map.png"));
                     num++;
