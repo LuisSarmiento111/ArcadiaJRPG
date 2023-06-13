@@ -7,23 +7,12 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Monster extends Entity{
-    private final String[][] monsters = getMonsterData("src/test.txt");
+public class Monster extends Entity {
+    private final String[][] monsters = getMonsterData("src/monster.data");
 
-    public Monster(String species, JRPG JRPG, GamePanel panel) { // maybe coordinate parameters since monsters can't be on the same place when in battle
-        super(species, JRPG, panel);
+    public Monster(String species, GamePanel panel) { // maybe coordinate parameters since monsters can't be on the same place when in battle
+        super(species, panel);
         setStats();
-    }
-
-    public void setStats() { // base stats for different monsters that are based on the player's level.
-        for (int r = 0; r < monsters.length; r++) {
-            if (monsters[r][0].equals(name)) {
-                health = Integer.parseInt(monsters[r][1]);
-                speed = Integer.parseInt(monsters[r][2]);
-                strength = Integer.parseInt(monsters[r][3]);
-                magicPower = Integer.parseInt(monsters[r][4]);
-            }
-        }
     }
 
     public static String[][] getMonsterData(String fileName) {
@@ -36,8 +25,7 @@ public class Monster extends Entity{
                 String[] data = line.split(" ");
                 monsters.add(data);
             }
-        }
-        catch (FileNotFoundException noFile) {
+        } catch (FileNotFoundException noFile) {
             System.out.println("File not found!");
             return null;
         }
@@ -46,5 +34,17 @@ public class Monster extends Entity{
             monsterData[i] = monsters.get(i);
         }
         return monsterData;
+    }
+
+    public void setStats() { // base stats for different monsters that are based on the player's level.
+        for (int r = 0; r < monsters.length; r++) {
+            if (monsters[r][0].equals(name)) {
+                health = Integer.parseInt(monsters[r][1]);
+                speed = Integer.parseInt(monsters[r][2]);
+                strength = Integer.parseInt(monsters[r][3]);
+                magicPower = Integer.parseInt(monsters[r][4]);
+
+            }
+        }
     }
 }

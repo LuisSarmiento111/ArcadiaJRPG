@@ -13,16 +13,19 @@ public class PlayerDataStorage {
             for (int i = 0; i < playerData.size(); i++) {
                 if (i + 1 == slot) {
                     fw.write("LoadFile" + slot + ": " + player.name);
-                    fw.write("|" + player.getPlayerClass());
+                    fw.write("|" + player.playerClass);
                     fw.write("|" + player.worldX + "|" + player.worldY);
+                    fw.write("|" + player.playerLevel + "|" + player.exp);
+                    fw.write("|" + player.health + "|" + player.maxHealth + "|" + player.speed + "|" + player.strength + "|" +
+                            player.magicPower + "|" + player.defense + "|" + player.statPoints + "|" + player.nextLvlExp);
+                    fw.write("|" + player.storyProgress + "|" + player.direction);
                 } else {
                     fw.write(playerData.get(i));
                 }
                 fw.write("\n");
             }
             fw.close();
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
     }
@@ -36,21 +39,20 @@ public class PlayerDataStorage {
                 String line = reader.nextLine();
                 playerData.add(line);
             }
-        }
-        catch (FileNotFoundException noFile) {
+        } catch (FileNotFoundException noFile) {
             return null;
         }
         return playerData;
     }
 
-    public static Player loadPlayerData(int slot, GamePanel gp) {
+    public static String[] loadPlayerData(int slot, GamePanel gp) {
         String playerData = getPlayerData().get(slot - 1);
         if (!playerData.contains("|")) {
             return null;
         } else {
             playerData = playerData.substring(playerData.indexOf(":") + 2);
             String[] data = playerData.split("\\|");
-            return new Player(gp.JRPG, gp, data[0], data[1], slot);
+            return data;
         }
     }
 

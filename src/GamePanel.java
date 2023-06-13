@@ -1,19 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
     public final int originalTileSize = 16;
-    public final int scale = 2;
+    public final int scale = 3;
     public final int tileSize = originalTileSize * scale;
     public final int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     public final int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-    public final int maxWorldRow = 70;
-    public final int maxWorldCol = 70;
+    public final int maxWorldRow = 85;
+    public final int maxWorldCol = 100;
     public final int FPS = 60;
     public KeyHandler keyHandler;
     public TileManager tileManager;
     public CollisionChecker collisionChecker;
     public JRPG JRPG;
+    public int timer;
     public Screens screens;
     public boolean inGame;
     public boolean characterCreationScreen;
@@ -22,7 +25,9 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean gameOver;
     public boolean settingScreen;
     public boolean battleScreen;
+    public boolean characterStatsScreen;
     public boolean characterSelectionScreen;
+    public boolean dialogueScreen;
     Thread gameThread;
 
     public GamePanel(JRPG JRPG) {
@@ -38,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         screens = new Screens(this);
+        timer = 0;
 
         inGame = false;
         titleScreen = true;
@@ -60,8 +66,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             repaint();
 
-            // System.out.println("X-Coordiante: " + player.getxCoordinate() + " Y-Coordinate: " + player.getyCoordinate());
-
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime /= 1000000;
@@ -78,7 +82,22 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (inGame) {
+            timer++;
+            if (timer > 1000) {
+                JRPG.setMonster();
+                timer = 0;
+            }
             JRPG.player.update();
+            for (int i = 0; i < JRPG.NPC.length; i++) {
+                if (JRPG.NPC[i] != null) {
+                    JRPG.NPC[i].update();
+                }
+            }
+            for (int i = 0; i < JRPG.monsters.length; i++) {
+                if (JRPG.monsters[i] != null) {
+                    JRPG.monsters[i].update();
+                }
+            }
         }
     }
 
@@ -92,11 +111,41 @@ public class GamePanel extends JPanel implements Runnable {
             screens.drawCharacterCreation(g2);
         } else if (characterSelectionScreen) {
             screens.drawCharacterSelection(g2);
+        } else if (battleScreen) {
+            if (JRPG.turn == -1) {
+                JRPG.battleSetUp();
+            }
+            screens.drawBattle(g2);
+            for (int i = 0; i < JRPG.entities.size(); i++) {
+                JRPG.entities.get(i).draw(g2);
+            }
+            JRPG.battle();
+            screens.drawMessage(g2);
         } else {
             tileManager.draw(g2);
-            JRPG.player.draw(g2);
+            JRPG.entities.add(JRPG.player);
+            for (int i = 0; i < JRPG.NPC.length; i++) {
+                if (JRPG.NPC[i] != null) {
+                    JRPG.entities.add(JRPG.NPC[i]);
+                }
+            }
+            if (JRPG.player.storyProgress > -1) {
+                for (int i = 0; i < JRPG.monsters.length; i++) {
+                    if (JRPG.monsters[i] != null) {
+                        JRPG.entities.add(JRPG.monsters[i]);
+                    }
+                }
+            }
+            for (int i = 0; i < JRPG.entities.size(); i++) {
+                JRPG.entities.get(i).draw(g2);
+            }
+            JRPG.entities.clear();
+            screens.drawMessage(g2);
             if (menuScreen) {
                 screens.drawInGameMenu(g2);
+            }
+            if (characterStatsScreen) {
+                screens.drawStatsScreen(g2);
             }
         }
         g2.dispose();
