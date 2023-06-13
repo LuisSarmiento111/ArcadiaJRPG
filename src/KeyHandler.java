@@ -197,7 +197,6 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                gp.screens.optionNum = 0;
                 int slot = PlayerDataStorage.getEmptySlot();
                 if (gp.screens.optionNum == 0) {
                     gp.JRPG.player = new Player(gp, gp.screens.textBox, "Knight", slot);

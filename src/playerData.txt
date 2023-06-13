@@ -1,4 +1,4 @@
-LoadFile1: Soup|Knight|1806|2400|2|8|12|22|4|7|2|4|3|9|0|up
+LoadFile1: Soup|Knight|1806|2400|2|8|12|22|4|7|2|4|3|10|0|up
 LoadFile2:
 LoadFile3:
 LoadFile4:

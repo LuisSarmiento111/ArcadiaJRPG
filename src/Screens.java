@@ -342,7 +342,7 @@ public class Screens {
             g.drawString("[+]", x + 2 * getCenterOfText(text, g) + 15, y);
         }
         y += 27;
-        g.drawString("Next Level:" + gamePanel.JRPG.player.nextLvlExp, x, y);
+        g.drawString("Next Level:" + (gamePanel.JRPG.player.nextLvlExp - gamePanel.JRPG.player.exp), x, y);
         y += 50;
         g.drawString("Stat Points:" + gamePanel.JRPG.player.statPoints, x, y);
     }

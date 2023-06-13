@@ -47,7 +47,7 @@ public class Player extends Entity {
         sprites = new BufferedImage[36];
         getPlayerImage();
         battleSprites = new BufferedImage[6];
-        getBattleImage();
+        // getBattleImage();
     }
 
     public Player(GamePanel gp, String[] data, int saveSlot) {
@@ -83,7 +83,7 @@ public class Player extends Entity {
         sprites = new BufferedImage[36];
         getPlayerImage();
         battleSprites = new BufferedImage[6];
-        getBattleImage();
+        // getBattleImage();
     }
 
     public void getPlayerImage() {
@@ -253,8 +253,8 @@ public class Player extends Entity {
             g2.drawString(health + "/" + maxHealth, 750, gamePanel.screenHeight - 128);
         }
         g2.drawImage(image, screenX, screenY, size, size, null);
-        g2.setColor(Color.RED);
-        g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
+        //g2.setColor(Color.RED);
+        // g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
     }
 
 
@@ -321,7 +321,7 @@ public class Player extends Entity {
             magicPower++;
             defense++;
             speed++;
-            nextLvlExp = nextLvlExp * 2 - (exp - nextLvlExp);
+            nextLvlExp = nextLvlExp * 2;
             statPoints += 3;
             gamePanel.screens.addMessage(name + " leveled up level " + playerLevel);
             gamePanel.screens.addMessage("Gained 3 stat points");

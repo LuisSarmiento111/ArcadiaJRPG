@@ -87,8 +87,8 @@ public class Entity {
                 g.fillRect(screenX + hitBox.x, screenY + hitBox.y - 15, (int) hpBarValue, 10);
             }
             g.drawImage(image, screenX, screenY, size, size, null);
-            g.setColor(Color.RED);
-            g.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
+            //g.setColor(Color.RED);
+            // g.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
         }
     }
 
